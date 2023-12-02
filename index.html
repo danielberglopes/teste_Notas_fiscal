@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -80,7 +81,8 @@
 
     <div class="navbar container ContainerCentro bg-white mt-3">
         <div class="container-fluid ContainerPrincipal">
-            <a class="navbar-brand text-white"> nota fiscal</a>
+
+            <!-- <a class="navbar-brand text-white"><img src="img\bloco-de-anotacoes.png" alt=""> nota fiscal</a> -->
 
             <button class="btn btn-warning " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <span class="icon">+</span> Adicionar Novo
@@ -88,83 +90,97 @@
         </div>
 
         <div class="container mt-3">
+            <div id="print" class="nfeArea">
 
-        </div>
 
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header  bg-success">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">gera nota fiscal</h1>
-
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3">
-                        <div class="col-md-4">
-                            <label for="validationDefault01" class="form-label">Nome do Cliente:</label>
-                            <input type="text" class="form-control" id="validationDefault01"
-                                placeholder="Nome do Cliente" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">CNPJ/CPF:</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="CPF / CNPJ "
-                                required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">Endereço:</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="Endereço"
-                                required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">CEP:</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="CEP" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">E-Mail:</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="E-Mail"
-                                required>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="validationDefault05" class="form-label">UF:</label>
-                            <input type="text" class="form-control" id="validationDefault05" placeholder="UF" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">NÚMERO DA NOTA:</label>
-                            <input type="text" class="form-control" id="validationDefault02"
-                                placeholder="NÚMERO DA NOTA" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">CÓDIGO DE VERIFICÃO:</label>
-                            <input type="text" class="form-control" id="validationDefault02"
-                                placeholder="CÓDIGO DE VERIFICÃO" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault02" class="form-label">Inscrição Municipal:</label>
-                            <input type="text" class="form-control" id="validationDefault02"
-                                placeholder="Inscrição Municipal" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">DISCRIMINAÇÃO DOS
-                                SERVIÇOS</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar nota</button>
-                            <button type="submit" class="btn btn-success">Salva nota</button>
-                        </div>
-                    </form>
-                </div>
 
             </div>
+
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header  bg-success">
+                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">gera nota fiscal</h1>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3" id="meuFormulario">
+                            <div class="col-md-4">
+                                <label for="nome" class="form-label">Nome do Cliente:</label>
+
+                                <input type="text" class="form-control" id="nome" name="nome"
+                                    placeholder="Nome do Cliente" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cpf" class="form-label">Cnpj/Cpf:</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Cpf/Cnpj"
+                                    required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="endereço" class="form-label">Endereço:</label>
+                                <input type="text" class="form-control" id="endereço" name="endereço"
+                                    placeholder="Endereço" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cep" class="form-label">Cep:</label>
+                                <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email" class="form-label">E-mail:</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="E-Mail"
+                                    required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="municipio" class="form-label">Municipio:</label>
+                                <input type="text" class="form-control" id="municipio" name="municipio"
+                                    placeholder="E-Mail" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="uf" class="form-label">Uf:</label>
+                                <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="numeroNota" class="form-label">Numero da Nota:</label>
+                                <input type="text" class="form-control" id="numeroNota" name="numeroNota"
+                                    placeholder="Numero da Nota" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="codigoNota" class="form-label">Codigo da Nota:</label>
+                                <input type="text" class="form-control" id="codigoNota" name="codigoNota"
+                                    placeholder="Codigo da Nota" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inscriçãoMunicipal" class="form-label">Inscrição Municipal:</label>
+                                <input type="text" class="form-control" id="inscriçãoMunicipal"
+                                    name="inscriçãoMunicipal" placeholder="Inscrição Municipal" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Discrição dos serviços</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="Discrição">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
+                                    nota</button>
+                                <button type="button" class="btn btn-success" id="btnDisplay"
+                                    onclick="gerarNotaFiscal()">Gerar Nota Fiscal</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+
+
+
 </body>
 
 </html>
