@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Inclua Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -16,66 +14,6 @@
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<style>
-    * {
-        font-family: sans-serif;
-
-    }
-
-
-    body {
-        background-color: #dcdcdc;
-    }
-
-    img {
-        width: 58px;
-        border-radius: 40px;
-        height: 58px;
-
-    }
-
-    .ContainerPrincipal {
-        background-color: #78ad7d;
-        margin-top: -8px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        height: 60px;
-    }
-
-
-
-    button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        background-color: #4CAF50;
-        /* Green */
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    button:hover {
-
-        background-color: #45a049;
-    }
-
-    .ContainerCentro {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    .icon {
-        margin-right: 5px;
-    }
-
-    .tabelaPrincipal {
-        border: 1px solid;
-    }
-</style>
 
 <body>
     <nav class="navbar  bg-success">
@@ -104,7 +42,7 @@
         <div class="container mt-3">
             <div id="print" class="Content">
                 <div id="notaFiscal" style="display: none;">
-                    <!-- A nota fiscal gerada será exibida aqui -->
+
                 </div>
 
             </div>
@@ -149,7 +87,7 @@
                             <div class="col-md-4">
                                 <label for="municipio" class="form-label">Municipio:</label>
                                 <input type="text" class="form-control" id="municipio" name="municipio"
-                                    placeholder="E-Mail" required>
+                                    placeholder="Municipio" required>
                             </div>
 
                             <div class="col-md-4">
@@ -171,12 +109,20 @@
                                 <input type="text" class="form-control" id="inscricaoMunicipal"
                                     name="inscriçãoMunicipal" placeholder="Inscrição Municipal" required>
                             </div>
-                            <div class="col-md-6">
-                                <label for="discrição" class="form-label">Discrição dos serviços</label>
-                                <input type="text" class="form-control" name="discrição" id="discrição"
-                                    placeholder="Discrição">
+                            <div class="col-md-4">
+                                <label for="valor" class="form-label">Valor:</label>
+                                <input type="text" class="form-control" id="valor" name="inscriçãoMunicipal"
+                                    placeholder="Valor" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dataHora" class="form-label">Data</label>
+                                <input type="date" class="form-control" name="dataHora" id="dataHora">
                             </div>
 
+                            <div class="mb-3">
+                                <label for="discrição" class="form-label">Discrição dos serviços</label>
+                                <textarea class="form-control" name="discrição" id="discrição" rows="3"></textarea>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
                                     nota</button>
@@ -193,248 +139,8 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
 
+        <script src="script.js"></script>
 
-        <script>
-            function gerarNotaFiscal() {
-                // Coletar informações da nota fiscal
-                var nomeCliente = document.getElementById('cliente').value;
-                var nomecpf = document.getElementById('cpf').value;
-                var nomeemail = document.getElementById('email').value;
-                var nomemunicipi = document.getElementById('municipio').value;
-                var nomecep = document.getElementById('cep').value;
-                var nomeuf = document.getElementById('uf').value;
-                var nomediscrição = document.getElementById('discrição').value;
-                var nomeendereço = document.getElementById('endereço').value;
-                var nomeinscricaoMunicipal = document.getElementById('inscricaoMunicipal').value;
-                var nomecodigoNota = document.getElementById('codigoNota').value;
-                var nomenumeroNota = document.getElementById('numeroNota').value;
-                // Coletar outras informações...
-                var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                myModal.hide();
-
-                limparCampo();
-
-                function limparCampo() {
-                    document.getElementById('cliente').value = '';
-                    document.getElementById('cpf').value = '';
-                    document.getElementById('email').value = '';
-                    document.getElementById('municipio').value = '';
-                    document.getElementById('cep').value = '';
-                    document.getElementById('uf').value = '';
-                    document.getElementById('discrição').value = '';
-                    document.getElementById('endereço').value = '';
-                    document.getElementById('inscricaoMunicipal').value = '';
-                    document.getElementById('codigoNota').value = '';
-                    document.getElementById('numeroNota').value = '';
-
-                }
-                // Construir a nota fiscal em HTML
-                var notaFiscalHTML = `
-   
-        <table class="tabela" style="width: 100%;" >
-            <tr>
-                <td style="width: 40%; height: 100px;" rowspan="3">
-
-                    <table style="width: 100%; height: 108px;">
-                        <tr>
-                            <td style="width: 33%; vertical-align: middle;">
-                         
-                            </td>
-                            <td style="vertical-align: middle; padding: 5px;">
-                             
-                          
-                          
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-
-                </td>
-                <td style="width: 80%; height: 100px; text-align: center; vertical-align: middle;" rowspan="3">
-                    <span class="sub-titulo" style="font-size: large;">Chic Couture Corner</span>
-                </td>
-                <td>
-                    <dl>
-                        <dt>Número da Nota</dt>
-                        <dd id="dadosnfe_nu_invoice">[${nomenumeroNota}]</dd>
-                    </dl>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <dl>
-                        <dt>Data e Hora de Emissão</dt>
-                        <dd id="dadosnfe_dt_invoice_issue">[dt_invoice_issue]</dd>
-                    </dl>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <dl>
-                        <dt>Código de Verificão</dt>
-                        <dd id="dadosnfe_ds_protocol">[${nomecodigoNota}]</dd>
-                    </dl>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="height: 20%">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="width: 50%; text-align: center;" colspan="2">
-                                <span class="sub-titulo">PRESTADOR DE SERVIÇOS</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="campo_titulo" style="width: 50%; padding-left: 5px">
-                                CNPJ/CPF: <span id="emit_nu_cnpj_cpf" class="campo_valor">[867.979.676-45]</span>
-                                <br />
-                                Nome/Razão Social: <span class="campo_valor" id="emit_corp_ds_issuer_name">[diego luiz]</span>
-                                <br />
-                                Endereço: <span id="emit_ds_addres" class="campo_valor">[Rua raimundo pacheco, 349]</span>
-                               
-                                CEP: <span id="emit_nu_cep" class="campo_valor">[61944-430]</span>
-                                <br />
-                                Município: <span class="campo_valor" id="emit_corp_ds_city_name">[maranguape]</span>
-                            </td>
-                            <td class="campo_titulo" style="width: 50%; padding-left: 5px;">
-                                Inscrição Municipal: <span class="campo_valor" id="emit_nu_im">[fortaleza]</span>
-                                <br />
-                                <br />
-                                <br />
-                                UF: <span class="campo_valor" id="emit_corp_nfe_ds_uf">[CE]</span>
-                            </td>
-                        </tr>
-                    </table>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="height: 20%">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="width: 50%; text-align: center;" colspan="2">
-                                <span class="sub-titulo">TOMADOR DE SERVIÇO</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="campo_titulo" style="width: 50%; padding-left: 5px;">
-                                    Nome/Razão Social: <span class="campo_valor" id="dest_receiver_name">[${nomeCliente}]</span>
-                                <br />
-                                CNPJ/CPF: <span class="campo_valor" id="dest_nu_cnpj_cpf">[${nomecpf}]</span>
-                                <br />
-                                Endereço: <span id="dest_ds_address" class="campo_valor">[${nomeendereço}]</span>
-                                CEP: <span id="dest_nu_cep" class="campo_valor">[${nomecep}]</span>
-                                <br />
-
-                                Município: <span class="campo_valor" id="dest_ds_city_name">[${nomemunicipi}]</span>&nbsp;&nbsp;&nbsp;
-                                UF: <span class="campo_valor" id="dest_ds_uf">[${nomeuf}]</span>
-                            </td>
-                            <td class="campo_titulo" style="width: 50%; padding-left: 5px;">
-                                Inscrição Municipal: <span class="campo_valor" id="dest_nu_im">[${nomeinscricaoMunicipal}]</span>
-                                <br />
-                                <br />
-                                <br />
-                                E-Mail: <span class="campo_valor" id="dest_ds_email">[${nomeemail}]</span>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="height: 190px;">
-                    <table style="width: 100%; height: 100%;">
-                        <tr>
-                            <td style="text-align: center; width: 100%; height: 1px;" colspan="2">
-                                <span class="sub-titulo">DISCRIMINAÇÃO DOS SERVIÇOS</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="campo_titulo" style="width: 50%; padding-left: 5px; vertical-align: top;">
-                                [${nomediscrição}]
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="text-align: center;">
-                    <span class="sub-titulo">TOTAL DA NOTA = R$ <span id="TOTSERV">[orderTotal]</span></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <table style="width: 100%; height: 100%;">
-                        <tr>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>COFINS</dt>
-                                    <dd style="text-align: right;">R$ <span id="COFINS">***</span></dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>CSLL</dt>
-                                    <dd style="text-align: right;">R$ <span id="CSLL">***</span></dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>INSS</dt>
-                                    <dd style="text-align: right;">R$ <span id="INSS">***</span></dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>IRPJ</dt>
-                                    <dd style="text-align: right;">R$ <span id="IRPJ">***</span></dd>
-                                </dl>
-                            </td>
-                            <td>
-                                <dl>
-                                    <dt>PIS</dt>
-                                    <dd style="text-align: right;">R$ <span id="PIS">***</span></dd>
-                                </dl>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <span class="campo_titulo">Código do Serviço: [serviceCode]</span>
-                </td>
-            </tr>
-            
-           
-        </table>
-
-       
- 
-            `;
-
-                // Exibir a nota fiscal na tela
-                document.getElementById('notaFiscal').innerHTML = notaFiscalHTML;
-                document.getElementById('notaFiscal').style.display = 'block';
-
-            }
-
-
-        </script>
-        <script>
-            function downloadPDF() {
-                const item = document.querySelector(".Content");
-
-                var opt = {
-                    margin: 1,
-                    filename: "myfile.pdf",
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-                };
-
-                html2pdf().set(opt).from(item).save();
-            }
-
-        </script>
 
 </body>
 

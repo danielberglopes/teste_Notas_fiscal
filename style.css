@@ -140,6 +140,65 @@
     width: 52px;
 }
 
+* {
+    font-family: sans-serif;
+
+}
+
+
+body {
+    background-color: #dcdcdc;
+}
+
+img {
+    width: 58px;
+    border-radius: 40px;
+    height: 58px;
+
+}
+
+.ContainerPrincipal {
+    background-color: #78ad7d;
+    margin-top: -8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 60px;
+}
+
+
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+
+    background-color: #45a049;
+}
+
+.ContainerCentro {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.tabelaPrincipal {
+    border: 1px solid;
+}
+
 #popup li {
     float: right;
     margin: 3px;
