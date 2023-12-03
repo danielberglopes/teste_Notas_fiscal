@@ -7,17 +7,14 @@
     <title>Bootstrap demo</title>
     <link rel="stylesheet" href="style.css">
     <!-- Inclua Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
-    <!-- Inclua Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <style>
     * {
@@ -90,25 +87,22 @@
 
     <div class="navbar container ContainerCentro bg-white mt-3">
         <div class="container-fluid ContainerPrincipal">
-            <!-- Seu botão com ícones -->
+
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Adicionar Novo <i class="fas fa-plus"></i>
             </button>
 
 
-            <!-- <button class="btn btn-warning " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <span class="icon">+</span> Adicionar Novo
-            </button> -->
 
-            <!-- Seu botão com ícone de seta para baixo -->
-            <button type="button" class="btn btn-danger" id="btnDisplay">
+            <button type="button" class="btn btn-danger" onclick="downloadPDF()">
                 Baixar PDF <i class="fas fa-arrow-down"></i>
+
             </button>
+
         </div>
 
         <div class="container mt-3">
-            <div id="print" class="nfeArea">
-
+            <div id="print" class="Content">
                 <div id="notaFiscal" style="display: none;">
                     <!-- A nota fiscal gerada será exibida aqui -->
                 </div>
@@ -218,17 +212,33 @@
                 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                 myModal.hide();
 
+                limparCampo();
+
+                function limparCampo() {
+                    document.getElementById('cliente').value = '';
+                    document.getElementById('cpf').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('municipio').value = '';
+                    document.getElementById('cep').value = '';
+                    document.getElementById('uf').value = '';
+                    document.getElementById('discrição').value = '';
+                    document.getElementById('endereço').value = '';
+                    document.getElementById('inscricaoMunicipal').value = '';
+                    document.getElementById('codigoNota').value = '';
+                    document.getElementById('numeroNota').value = '';
+
+                }
                 // Construir a nota fiscal em HTML
                 var notaFiscalHTML = `
    
-        <table class="tabela" style="width: 100%;">
+        <table class="tabela" style="width: 100%;" >
             <tr>
                 <td style="width: 40%; height: 100px;" rowspan="3">
 
                     <table style="width: 100%; height: 108px;">
                         <tr>
                             <td style="width: 33%; vertical-align: middle;">
-                                <img class="client_logo" width="100" height="100" style="vertical-align: middle" src="img\logo.jpg" />
+                         
                             </td>
                             <td style="vertical-align: middle; padding: 5px;">
                              
@@ -394,61 +404,8 @@
                     <span class="campo_titulo">Código do Serviço: [serviceCode]</span>
                 </td>
             </tr>
-            <tr>
-                <td colspan="3">
-                    <table style="width: 100%; height: 100%;">
-                        <tr>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>Valor Total das Deduções (R$)</dt>
-                                    <dd style="text-align: right;">***</dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>Base de Cálculo (R$)</dt>
-                                    <dd style="text-align: right;" id="ISS_Bs">***</dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>Alíquota (%)</dt>
-                                    <dd style="text-align: right;" id="ISS_Aliq">[vl_issqn_aliq]</dd>
-                                </dl>
-                            </td>
-                            <td style="border-right: 1px solid #000;">
-                                <dl>
-                                    <dt>Valor do ISS (R$)</dt>
-                                    <dd style="text-align: right;" id="ISS">[vl_issqn]</dd>
-                                </dl>
-                            </td>
-                            <td>
-                                <dl>
-                                    <dt>Crédito p/ Abatimento do IPTU</dt>
-                                    <dd style="text-align: right;">***</dd>
-                                </dl>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="max-width: 400px;">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="text-align: center; width: 100%; height: 1px;" colspan="2">
-                                <span class="sub-titulo">OUTRAS INFORMAÇÕES</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="campo_titulo"
-                                style="width: 50%; padding-left: 5px; vertical-align: top;">
-                                <span class="campo_valor" id="dadosnfe_ds_additional_information">[ds_additional_information]</span>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+            
+           
         </table>
 
        
@@ -458,29 +415,27 @@
                 // Exibir a nota fiscal na tela
                 document.getElementById('notaFiscal').innerHTML = notaFiscalHTML;
                 document.getElementById('notaFiscal').style.display = 'block';
-                document.getElementById('downloadButton').style.display = 'block';
+
             }
 
-            function baixarNotaFiscal() {
-                // Obter o conteúdo da nota fiscal
-                var notaFiscalConteudo = document.getElementById('notaFiscal').innerHTML;
 
-                // Criar um blob com o conteúdo HTML
-                var blob = new Blob([notaFiscalConteudo], { type: 'application/pdf' });
-
-                // Criar um link para download
-                var link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'nota_fiscal.pdf';
-
-                // Simular um clique no link para iniciar o download
-                document.body.appendChild(link);
-                link.click();
-
-                // Remover o link após o download
-                document.body.removeChild(link);
-            }
         </script>
+        <script>
+            function downloadPDF() {
+                const item = document.querySelector(".Content");
+
+                var opt = {
+                    margin: 1,
+                    filename: "myfile.pdf",
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+                };
+
+                html2pdf().set(opt).from(item).save();
+            }
+
+        </script>
+
 </body>
 
 </html>
